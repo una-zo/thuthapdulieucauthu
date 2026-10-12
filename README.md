@@ -1,6 +1,9 @@
 Bài Tập Lập Trình Với Python
+
 I.
+
 Viết chương trình Python thu thập dữ liệu phân tích cầu thủ với yêu cầu như sau:
+
 I.1
 - Thu thập dữ liệu thống kê của tất cả các cầu thủ có số phút thi đấu nhiều hơn 90 phút tại giải bóng đá ngoại hạng Anh mùa 2024-2025.
 - Nguồn dữ liệu: https://fbref.com/en/
