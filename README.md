@@ -1,44 +1,80 @@
-PHÂN TÍCH DỮ LIỆU CẦU THỦ NGOẠI HẠNG ANH MÙA GIẢI 2024–2025
+# PHÂN TÍCH DỮ LIỆU CẦU THỦ NGOẠI HẠNG ANH MÙA GIẢI 2024–2025
 
-I.
+## Giới thiệu
 
-I.1
-- Thu thập dữ liệu thống kê của tất cả các cầu thủ có số phút thi đấu nhiều hơn 90 phút tại giải bóng đá ngoại hạng Anh mùa 2024-2025.
-- Nguồn dữ liệu: https://fbref.com/en/
-- Ghi kết quả vào một bảng trong cơ sở dữ liệu SQLite, bảng kết quả có cấu trúc như sau:
-	+ Mỗi cột tương ứng với một chỉ số.
-	+ Chỉ số nào không có hoặc không áp dụng thì để là N/a
-	+ Tham khảo: https://fbref.com/en/squads/822bd0ba/2023-2024//en/squads/822bd0ba/2023-2024/Liverpool-Stats
+Dự án được thực hiện trong khuôn khổ bài tập nhóm môn Lập trình Python, với mục tiêu thu thập, lưu trữ, truy vấn và phân tích dữ liệu cầu thủ thuộc giải bóng đá Ngoại hạng Anh (Premier League) mùa giải 2024–2025.
 
-I.2
--  Với mỗi cầu thủ được ghi trong bảng trên, thu thập giá chuyển nhượng của cầu thủ trong mùa 2024-2025 từ trang web https://www.footballtransfers.com. Nếu không có dữ liệu thì để là N/a
-- Kết quả ghi vào một bảng thứ hai trong cơ sở dữ liệu SQLite.
-Chú ý: 
-Trong khi crawl dữ liệu, có thể gặp các tình huống như Capchar và hoặc rate-limit. Đề xuất phương pháp khắc phục nếu có
-Có thể dùng module request hoặc selenium để cào dữ liệu.
+Dự án sử dụng Python để thu thập dữ liệu từ các nguồn trực tuyến, lưu trữ bằng SQLite, xây dựng API phục vụ truy vấn thông tin và thực hiện phân tích thống kê nhằm đánh giá hiệu suất cầu thủ cũng như đề xuất phương pháp định giá cầu thủ dựa trên dữ liệu.
 
-II.
+## I. Thu thập và lưu trữ dữ liệu
 
-II.1
-Sử dụng module Python Flask để tạo các Restful API tra cứu chỉ số cầu thủ trong cơ sở dữ liệu vừa tạo ở câu 1 theo các tiêu chí sau:
--	Tên cầu thủ: trả về toàn bộ chỉ số của cầu thủ có tên tương ứng.
--	Câu lạc bộ: Trả về toàn bộ chỉ số của các cầu thủ thuộc về câu lạc bộ đó.
+### I.1. Thu thập dữ liệu thống kê cầu thủ
 
-II.2
-Sử dụng module Request, viết 1 chương trình python để tra cứu dữ liệu cầu thủ theo 2 tiêu chí như trên. Tên cầu thủ hoặc câu lạc bộ được truyền vào lúc chạy chương trình có cú pháp như sau:
-./> python lookup.py  --name  <tên cầu thủ>  --club <tên câu lạc bộ> 
--	Kết quả trả ra được in ra màn hình dưới dạng bảng, và 1 file CSV. Tên file được đặt theo tên cầu thủ hoặc câu lạc bộ, tùy theo sử dụng tham số đầu vào.
+- Thu thập dữ liệu thống kê cầu thủ Ngoại hạng Anh mùa giải 2024–2025 từ FBref.
+- Lựa chọn các cầu thủ có tổng thời gian thi đấu lớn hơn 90 phút.
+- Lưu trữ thông tin và các chỉ số thống kê của cầu thủ vào cơ sở dữ liệu SQLite.
+- Xử lý các giá trị bị thiếu hoặc không áp dụng theo yêu cầu của đề bài.
 
-III.
+### I.2. Thu thập giá trị chuyển nhượng cầu thủ
 
-III.1
-- Tìm trung vị, trung bình và độ lệch chuẩn của mỗi chỉ số các cầu thủ của mỗi đội. Ghi kết quả vào 1 file CSV.
-- Tìm đội bóng có chỉ số điểm số cao nhất ở mỗi chỉ số. Theo bạn đội nào có phong độ tốt nhất giải ngoại Hạng Anh mùa 2024-2025
+- Thu thập thông tin giá trị chuyển nhượng của cầu thủ từ FootballTransfers.
+- Kết hợp dữ liệu giá trị chuyển nhượng với dữ liệu thống kê cầu thủ.
+- Lưu trữ thông tin vào bảng dữ liệu riêng trong SQLite để phục vụ truy vấn và phân tích.
 
-III.2
-- Dựa vào kết quả từ câu I, đề xuất 1 phương pháp định giá cầu thủ.
+### Công nghệ sử dụng
 
-IV.
-- Sử dụng thuật toán K-means để phân loại các cầu thủ thành các nhóm có chỉ số tương tự nhau.
-- Theo bạn thì nên phân loại cầu thủ thành bao nhiêu nhóm? Vì sao (gợi ý: sử dụng biểu đồ Elbow và Silhoute, vẽ 2 biểu đồ này)? Bạn có Nhận xét gì về kết quả.
-- Sử dụng thuật toán PCA, giảm số chiều dữ liệu xuống 2 chiều, 3 chiều, vẽ hình scatter plot phân cụm các điểm dữ liệu trên mặt 2D, và khối 3D.
+Python, Requests/Selenium, SQLite.
+
+## II. Xây dựng API và chương trình truy vấn dữ liệu
+
+### II.1. Xây dựng RESTful API
+
+- Sử dụng Flask để xây dựng API truy vấn dữ liệu cầu thủ.
+- Hỗ trợ tìm kiếm thông tin cầu thủ theo tên hoặc câu lạc bộ.
+- Trả về dữ liệu từ cơ sở dữ liệu để các chương trình khác có thể sử dụng.
+
+### II.2. Xây dựng chương trình truy vấn bằng Python
+
+- Sử dụng thư viện Requests để gửi yêu cầu đến API.
+- Xây dựng chương trình dòng lệnh cho phép tra cứu cầu thủ theo tên hoặc câu lạc bộ.
+- Hiển thị kết quả truy vấn dưới dạng bảng.
+- Hỗ trợ xuất dữ liệu truy vấn ra tệp CSV.
+
+### Công nghệ sử dụng
+
+Python, Flask, Requests, SQLite, CSV.
+
+## III. Phân tích và đánh giá dữ liệu
+
+### III.1. Phân tích thống kê cầu thủ theo câu lạc bộ
+
+- Tính giá trị trung bình (Mean), trung vị (Median) và độ lệch chuẩn (Standard Deviation) của các chỉ số thống kê cầu thủ theo từng câu lạc bộ.
+- Xuất kết quả thống kê ra tệp CSV để thuận tiện cho việc tổng hợp và so sánh.
+- Xác định câu lạc bộ có giá trị cao nhất đối với từng chỉ số.
+- Dựa trên kết quả thu được để thảo luận về hiệu suất thi đấu của các câu lạc bộ trong mùa giải 2024–2025.
+
+### III.2. Đề xuất phương pháp định giá cầu thủ
+
+- Phân tích mối liên hệ giữa các chỉ số thống kê thi đấu và giá trị chuyển nhượng của cầu thủ.
+- Đề xuất phương pháp định giá dựa trên các đặc trưng dữ liệu phù hợp.
+- Đánh giá những yếu tố có thể ảnh hưởng đến giá trị cầu thủ và các hạn chế của phương pháp đề xuất.
+
+### Kết quả
+
+- Bộ dữ liệu cầu thủ được thu thập và lưu trữ trong SQLite.
+- Các kết quả thống kê được tổng hợp và xuất ra CSV.
+- Báo cáo phân tích hiệu suất cầu thủ theo câu lạc bộ.
+- Đề xuất phương pháp định giá cầu thủ dựa trên dữ liệu thống kê.
+
+## Công nghệ sử dụng
+
+- **Ngôn ngữ:** Python
+- **Thu thập dữ liệu:** Requests, Selenium
+- **Cơ sở dữ liệu:** SQLite
+- **Xử lý dữ liệu:** Pandas, NumPy
+- **Xây dựng API:** Flask
+- **Lưu trữ kết quả:** CSV
+
+## Mục đích dự án
+
+Dự án giúp vận dụng Python vào quy trình thu thập, lưu trữ, truy vấn và phân tích dữ liệu thực tế; đồng thời rèn luyện kỹ năng xử lý dữ liệu, làm việc với cơ sở dữ liệu và xây dựng API.
