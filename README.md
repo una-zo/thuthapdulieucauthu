@@ -1,8 +1,8 @@
 Bài Tập Lập Trình Với Python
 
 I.
-
 Viết chương trình Python thu thập dữ liệu phân tích cầu thủ với yêu cầu như sau:
+
 I.1
 - Thu thập dữ liệu thống kê của tất cả các cầu thủ có số phút thi đấu nhiều hơn 90 phút tại giải bóng đá ngoại hạng Anh mùa 2024-2025.
 - Nguồn dữ liệu: https://fbref.com/en/
@@ -10,6 +10,7 @@ I.1
 	+ Mỗi cột tương ứng với một chỉ số.
 	+ Chỉ số nào không có hoặc không áp dụng thì để là N/a
 	+ Tham khảo: https://fbref.com/en/squads/822bd0ba/2023-2024//en/squads/822bd0ba/2023-2024/Liverpool-Stats
+
 I.2
 -  Với mỗi cầu thủ được ghi trong bảng trên, thu thập giá chuyển nhượng của cầu thủ trong mùa 2024-2025 từ trang web https://www.footballtransfers.com. Nếu không có dữ liệu thì để là N/a
 - Kết quả ghi vào một bảng thứ hai trong cơ sở dữ liệu SQLite.
